@@ -15,7 +15,7 @@ import java.util.UUID;
 public class BeerController {
 
     @GetMapping({"/{beerId}"})
-    ResponseEntity<BeerDto> getBeerById(@PathVariable UUID beerId){
+    public ResponseEntity<BeerDto> getBeerById(@PathVariable UUID beerId){
 
         return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
     }
