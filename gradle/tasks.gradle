@@ -1,0 +1,10 @@
+asciidoctor {
+    sourceDir 'src/main/asciidoc'
+    attributes \
+		'snippets': file('build/generated-snippets')
+}
+tasks.register('serveDocs',Copy){
+
+    from layout.buildDirectory.file("docs/asciidoc/index.html")
+    into layout.projectDirectory.dir("src/main/resources/static")
+}

@@ -20,7 +20,6 @@ public class BeerLoader implements CommandLineRunner {
         this.beerRepository = beerRepository;
     }
 
-
     @Override
     public void run(String... args) {
         loadBeerObjects();
@@ -43,6 +42,5 @@ public class BeerLoader implements CommandLineRunner {
                     .price(new BigDecimal("13.95"))
                     .build());
         }
-        System.out.println("Loaded Beers: "+beerRepository.count());
     }
 }

@@ -3,10 +3,16 @@ package pdtg.lsmscbeersrvc.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.StringUtils;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
@@ -15,9 +21,16 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ExtendWith(RestDocumentationExtension.class)
+@AutoConfigureRestDocs(uriScheme = "https",uriHost = "dev.springframework.pdtg",uriPort = 80)
 @WebMvcTest(BeerController.class)
 class BeerControllerTest {
 
@@ -30,6 +43,7 @@ class BeerControllerTest {
 
     BeerDto validBeerDto;
     UUID randomUUID;
+
     @BeforeEach
     void setUp() {
         validBeerDto = BeerDto.builder()
@@ -44,33 +58,62 @@ class BeerControllerTest {
     @Test
     void getBeerById() throws Exception {
 
-        mockMvc.perform(get(API_URL+ randomUUID)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+        mockMvc.perform(get(API_URL + "{beerId}", randomUUID)
+                        .param("iscold", "yes")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(document("v1/beer/GET", pathParameters(
+                        parameterWithName("beerId").description("UUID of desired beer to get")),
+                        requestParameters(parameterWithName("iscold").description("Is Beer Cold Query param")),
+                        responseFields(
+                                fieldWithPath("id").description("Id of beer"),
+                                fieldWithPath("version").description("Version number"),
+                                fieldWithPath("createdDate").description("Date Created"),
+                                fieldWithPath("lastModifiedDate").description("Date Updated"),
+                                fieldWithPath("beerName").description("Beer Name"),
+                                fieldWithPath("beerStyle").description("Beer Style"),
+                                fieldWithPath("upc").description("UPC of Beer"),
+                                fieldWithPath("price").description("Price of the beer"),
+                                fieldWithPath("quantityOnHand").description("Quantity on hand")
+                        )
+                ));
     }
 
     @Test
     void saveNewBeer() throws Exception {
         String beerDtoString = objectMapper.writeValueAsString(validBeerDto);
+        ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
         mockMvc.perform(post(API_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(beerDtoString))
-                .andExpect(status().isCreated());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(beerDtoString))
+                .andExpect(status().isCreated())
+                .andDo(document("v1/beer/POST",
+                        requestFields(
+                                fields.withPath("id").ignored(),
+                                fields.withPath("version").ignored(),
+                                fields.withPath("createdDate").ignored(),
+                                fields.withPath("lastModifiedDate").ignored(),
+                                fields.withPath("beerName").description("Name of the beer"),
+                                fields.withPath("beerStyle").description("Style of Beer"),
+                                fields.withPath("upc").description("Beer UPC").attributes(),
+                                fields.withPath("price").description("The Beer Price"),
+                                fields.withPath("quantityOnHand").ignored()
+                        )));
     }
 
     @Test
     void updateBeerById() throws Exception {
         validBeerDto.setBeerName("Another name");
         String beerDtoString = objectMapper.writeValueAsString(validBeerDto);
-        mockMvc.perform(put(API_URL+randomUUID)
+        mockMvc.perform(put(API_URL + randomUUID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerDtoString))
-                        .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent());
     }
 
     @Test
     void deleteBeerById() throws Exception {
-        mockMvc.perform(delete(API_URL+randomUUID))
+        mockMvc.perform(delete(API_URL + randomUUID))
                 .andExpect(status().isNoContent());
     }
 
@@ -93,6 +136,7 @@ class BeerControllerTest {
                         .content(beerDtoString))
                 .andExpect(status().isBadRequest());
     }
+
     @Test
     void shouldValidateCreatedDateIsNull() throws Exception {
         validBeerDto.setCreatedDate(OffsetDateTime.now());
@@ -102,6 +146,7 @@ class BeerControllerTest {
                         .content(beerDtoString))
                 .andExpect(status().isBadRequest());
     }
+
     @Test
     void shouldValidateModifiedDateIsNull() throws Exception {
         validBeerDto.setLastModifiedDate(OffsetDateTime.now());
@@ -110,5 +155,20 @@ class BeerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerDtoString))
                 .andExpect(status().isBadRequest());
+    }
+
+    private static class ConstrainedFields {
+        private final ConstraintDescriptions constraintDescriptions;
+
+
+        private ConstrainedFields(Class<?> input) {
+            this.constraintDescriptions = new ConstraintDescriptions(input);
+        }
+
+        private FieldDescriptor withPath(String path){
+            return fieldWithPath(path).attributes(key("constraints").value(StringUtils
+                    .collectionToDelimitedString(this.constraintDescriptions
+                            .descriptionsForProperty(path),". ")));
+        }
     }
 }
