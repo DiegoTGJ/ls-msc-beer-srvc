@@ -2,14 +2,17 @@ package pdtg.lsmscbeersrvc.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 /**
  * Created by Diego T. 21-07-2022
  */
+@Validated
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
@@ -22,13 +25,13 @@ public class BeerController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveNewBeer(@RequestBody BeerDto beerDto){
+    public void saveNewBeer(@Valid @RequestBody BeerDto beerDto){
         //todo impl
     }
 
     @PutMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeerById(@PathVariable UUID beerId,@RequestBody BeerDto beerDto){
+    public void updateBeerById(@PathVariable UUID beerId,@Valid  @RequestBody BeerDto beerDto){
         //todo impl
     }
 
