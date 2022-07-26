@@ -464,7 +464,7 @@ documentation snippets.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'https://dev.springframework.pdtg:80/api/v1/beer/31f263c2-0adf-4b47-aa47-6d85dec7da0f?iscold=yes' -i -X GET \
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'https://dev.springframework.pdtg:80/api/v1/beer/3115c4d6-4ddf-4023-91f6-851666da6c61' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -473,7 +473,7 @@ documentation snippets.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v1/beer/31f263c2-0adf-4b47-aa47-6d85dec7da0f?iscold=yes HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v1/beer/3115c4d6-4ddf-4023-91f6-851666da6c61 HTTP/1.1
 Accept: application/json
 Host: dev.springframework.pdtg:80</code></pre>
 </div>
@@ -485,19 +485,94 @@ Host: dev.springframework.pdtg:80</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 148
+Content-Length: 236
 
-{"id":null,"version":null,"createdDate":null,"lastModifiedDate":null,"beerName":null,"beerStyle":null,"upc":null,"price":null,"quantityOnHand":null}</code></pre>
+{"id":"b65eb6f2-43a6-4049-91e5-34adcf690a59","version":3,"createdDate":"2022-07-23T09:17:51.732-04:00","lastModifiedDate":"2022-07-23T09:17:51.732-04:00","beerName":"test","beerStyle":"GOSE","upc":213213,"price":12.2,"quantityOnHand":4}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And one showing the Response Body:</p>
+<p>One showing the Response Body:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{"id":null,"version":null,"createdDate":null,"lastModifiedDate":null,"beerName":null,"beerStyle":null,"upc":null,"price":null,"quantityOnHand":null}</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{"id":"b65eb6f2-43a6-4049-91e5-34adcf690a59","version":3,"createdDate":"2022-07-23T09:17:51.732-04:00","lastModifiedDate":"2022-07-23T09:17:51.732-04:00","beerName":"test","beerStyle":"GOSE","upc":213213,"price":12.2,"quantityOnHand":4}</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>And one showing the Response fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Constraints</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of beer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>createdDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date Created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lastModifiedDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date Updated</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>beerName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must not be blank</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Beer Name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>beerStyle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must not be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Beer Style</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>upc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be positive. Must not be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UPC of Beer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>price</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Must be positive. Must not be null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Price of the beer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>quantityOnHand</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>++</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quantity on hand</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><code>POST REQUEST</code></p>
 </div>
@@ -580,7 +655,7 @@ Host: dev.springframework.pdtg:80
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-07-22 16:46:05 -0400
+Last updated 2022-07-22 18:59:17 -0400
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

@@ -58,23 +58,24 @@ class BeerControllerTest {
     @Test
     void getBeerById() throws Exception {
 
+        ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
         mockMvc.perform(get(API_URL + "{beerId}", randomUUID)
-                        .param("iscold", "yes")
+//                        .param("iscold", "yes")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("v1/beer/GET", pathParameters(
                         parameterWithName("beerId").description("UUID of desired beer to get")),
-                        requestParameters(parameterWithName("iscold").description("Is Beer Cold Query param")),
+//                        , requestParameters(parameterWithName("iscold").description("Is Beer Cold Query param")),
                         responseFields(
-                                fieldWithPath("id").description("Id of beer"),
-                                fieldWithPath("version").description("Version number"),
-                                fieldWithPath("createdDate").description("Date Created"),
-                                fieldWithPath("lastModifiedDate").description("Date Updated"),
-                                fieldWithPath("beerName").description("Beer Name"),
-                                fieldWithPath("beerStyle").description("Beer Style"),
-                                fieldWithPath("upc").description("UPC of Beer"),
-                                fieldWithPath("price").description("Price of the beer"),
-                                fieldWithPath("quantityOnHand").description("Quantity on hand")
+                                fields.withPath("id").description("Id of beer"),
+                                fields.withPath("version").description("Version number"),
+                                fields.withPath("createdDate").description("Date Created"),
+                                fields.withPath("lastModifiedDate").description("Date Updated"),
+                                fields.withPath("beerName").description("Beer Name"),
+                                fields.withPath("beerStyle").description("Beer Style"),
+                                fields.withPath("upc").description("UPC of Beer"),
+                                fields.withPath("price").description("Price of the beer"),
+                                fields.withPath("quantityOnHand").description("Quantity on hand")
                         )
                 ));
     }

@@ -23,8 +23,11 @@ One showing the HTTP response:
 
 include::{snippets}/v1/beer/GET/http-response.adoc[]
 
-And one showing the Response Body:
+One showing the Response Body:
 include::{snippets}/v1/beer/GET/response-body.adoc[]
+
+And one showing the Response fields:
+include::{snippets}/v1/beer/GET/response-fields.adoc[]
 
 `POST REQUEST`
 

@@ -5,8 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
@@ -20,7 +23,17 @@ public class BeerController {
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> getBeerById(@PathVariable UUID beerId){
 
-        return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
+        return new ResponseEntity<>(BeerDto.builder()
+                .id(UUID.randomUUID())
+                .version(3)
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
+                .beerName("test")
+                .beerStyle(BeerStyleEnum.GOSE)
+                .upc(213213L)
+                .price(new BigDecimal("12.2"))
+                .quantityOnHand(4)
+                .build(), HttpStatus.OK);
     }
 
     @PostMapping()
