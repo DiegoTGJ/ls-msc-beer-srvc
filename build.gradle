@@ -9,12 +9,8 @@ group = 'pdtg'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
+apply from: 'gradle/configurations.gradle'
 apply from: 'gradle/repositories.gradle'
 apply from: 'gradle/dependencies.gradle'
 apply from: 'gradle/test.gradle'

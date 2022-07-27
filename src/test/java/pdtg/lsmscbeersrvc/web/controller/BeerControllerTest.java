@@ -7,12 +7,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
+import pdtg.lsmscbeersrvc.services.BeerService;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
@@ -22,6 +24,8 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -41,6 +45,9 @@ class BeerControllerTest {
     ObjectMapper objectMapper = new ObjectMapper();
     private static final String API_URL = "/api/v1/beer/";
 
+    @MockBean
+    BeerService beerService;
+
     BeerDto validBeerDto;
     UUID randomUUID;
 
@@ -57,7 +64,7 @@ class BeerControllerTest {
 
     @Test
     void getBeerById() throws Exception {
-
+        given(beerService.getById(any(UUID.class))).willReturn(validBeerDto);
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
         mockMvc.perform(get(API_URL + "{beerId}", randomUUID)
 //                        .param("iscold", "yes")

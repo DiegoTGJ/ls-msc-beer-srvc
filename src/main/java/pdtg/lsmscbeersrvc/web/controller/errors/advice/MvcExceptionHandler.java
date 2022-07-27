@@ -1,4 +1,4 @@
-package pdtg.lsmscbeersrvc.web.controller.advice;
+package pdtg.lsmscbeersrvc.web.controller.errors.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
