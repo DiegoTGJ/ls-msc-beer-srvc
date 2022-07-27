@@ -42,11 +42,10 @@ public class BeerDto {
 
     @NotNull
     @Positive
-    private Long upc;
+    private String upc;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @NotNull
-    @Positive
     private BigDecimal price;
 
     private Integer quantityOnHand;

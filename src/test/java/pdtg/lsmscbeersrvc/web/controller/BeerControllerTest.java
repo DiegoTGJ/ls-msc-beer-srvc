@@ -14,6 +14,7 @@ import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
+import pdtg.lsmscbeersrvc.bootstrap.BeerLoader;
 import pdtg.lsmscbeersrvc.services.BeerService;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
@@ -23,7 +24,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -56,7 +56,7 @@ class BeerControllerTest {
         validBeerDto = BeerDto.builder()
                 .beerName("Some beer")
                 .beerStyle(BeerStyleEnum.ALE)
-                .upc(1231232L)
+                .upc(BeerLoader.BEER_1_UPC)
                 .price(new BigDecimal("12.2"))
                 .build();
         randomUUID = UUID.randomUUID();

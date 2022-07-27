@@ -1,6 +1,7 @@
 package pdtg.lsmscbeersrvc.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import java.util.UUID;
 /**
  * Created by Diego T. 21-07-2022
  */
+@Slf4j
 @RequiredArgsConstructor
 @Validated
 @RequestMapping("/api/v1/beer")

@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
@@ -28,7 +26,7 @@ public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 36, columnDefinition = "varchar",updatable = false,nullable = false)
+    @Column(length = 36, columnDefinition = "UUID",updatable = false,nullable = false)
     private UUID id;
 
     @Version
@@ -44,7 +42,7 @@ public class Beer {
     private String beerStyle;
 
     @Column(unique = true)
-    private Long upc;
+    private String upc;
 
     private BigDecimal price;
 
