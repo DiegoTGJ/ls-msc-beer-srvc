@@ -1,6 +1,9 @@
 package pdtg.lsmscbeersrvc.services;
 
+import org.springframework.data.domain.PageRequest;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.lsmscbeersrvc.web.model.BeerPagedList;
+import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
 import java.util.UUID;
 
@@ -13,4 +16,6 @@ public interface BeerService {
     BeerDto saveNewBeer(BeerDto beerDto);
 
     void updateBeer(UUID beerId, BeerDto beerDto);
+
+    BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest);
 }

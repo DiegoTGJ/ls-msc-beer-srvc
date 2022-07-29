@@ -1,1 +1,3 @@
-
+pdtg:
+  brewery:
+    beerInventoryServiceHost: Http://localhost:8082
