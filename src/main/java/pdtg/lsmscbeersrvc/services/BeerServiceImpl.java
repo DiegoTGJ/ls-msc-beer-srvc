@@ -1,13 +1,15 @@
 package pdtg.lsmscbeersrvc.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import pdtg.lsmscbeersrvc.domain.Beer;
 import pdtg.lsmscbeersrvc.repositories.BeerRepository;
-import pdtg.lsmscbeersrvc.web.controller.errors.NotFoundException;
+import pdtg.lsmscbeersrvc.web.controller.errors.exceptions.NotFoundException;
 import pdtg.lsmscbeersrvc.web.mappers.BeerMapper;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 import pdtg.lsmscbeersrvc.web.model.BeerPagedList;
@@ -21,12 +23,16 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class BeerServiceImpl implements BeerService {
 
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
+
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false")
     @Override
     public BeerDto getById(UUID beerId,boolean showInventoryOnHand) {
+        System.out.println("i was called");
         return !showInventoryOnHand ? beerMapper.beerToBeerDto(
                 beerRepository.findById(beerId)
                 .orElseThrow(NotFoundException::new))
@@ -51,8 +57,10 @@ public class BeerServiceImpl implements BeerService {
         beerRepository.save(beer);
     }
 
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false")
     @Override
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest,boolean showInventoryOnHand) {
+        System.out.println("i was called");
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 

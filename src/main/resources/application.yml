@@ -1,3 +1,8 @@
 pdtg:
   brewery:
     beerInventoryServiceHost: Http://localhost:8082
+spring:
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+      

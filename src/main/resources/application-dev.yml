@@ -6,7 +6,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         type: TRACE
@@ -15,3 +15,11 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+pdtg:
+  trace: true

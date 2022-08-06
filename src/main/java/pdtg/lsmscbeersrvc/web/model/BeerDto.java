@@ -1,6 +1,7 @@
 package pdtg.lsmscbeersrvc.web.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -21,7 +23,10 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BeerDto implements Serializable {
+
+    static final long serialVersionUID = -161538744071015469L;
 
     @Null
     private UUID id;
