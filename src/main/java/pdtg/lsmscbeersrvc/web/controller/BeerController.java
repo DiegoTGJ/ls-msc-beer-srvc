@@ -63,6 +63,14 @@ public class BeerController {
         beerService.updateBeer(beerId,beerDto);
     }
 
+    @GetMapping({"/beerUpc/{upc}"})
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable String upc,
+                                                @RequestParam(value = "showInventoryOnHand", required = false,defaultValue = "false")boolean showInventoryOnHand){
+        BeerDto beerDto = beerService.getByUpc(upc,showInventoryOnHand);
+        return new ResponseEntity<>(beerDto,HttpStatus.OK);
+    }
+
     @DeleteMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeerById(@PathVariable UUID beerId){

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pdtg.lsmscbeersrvc.domain.Beer;
 import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -19,4 +20,7 @@ public interface BeerRepository extends JpaRepository<Beer, UUID> {
     Page<Beer> findAllByBeerName(String beerName, PageRequest pageRequest);
 
     Page<Beer> findAllByBeerStyle(BeerStyleEnum beerStyle, PageRequest pageRequest);
+
+    Optional<Beer> findByUpc(String upc);
+
 }
