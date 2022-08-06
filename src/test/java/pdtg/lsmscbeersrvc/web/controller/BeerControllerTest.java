@@ -64,15 +64,18 @@ class BeerControllerTest {
 
     @Test
     void getBeerById() throws Exception {
-        given(beerService.getById(any(UUID.class),any(boolean.class))).willReturn(validBeerDto);
+        BeerDto validResponseDto = validBeerDto;
+        validResponseDto.setVersion(1);
+        validResponseDto.setCreatedDate(OffsetDateTime.now());
+        validResponseDto.setLastModifiedDate(OffsetDateTime.now());
+        validResponseDto.setId(UUID.randomUUID());
+        given(beerService.getById(any(UUID.class),any(boolean.class))).willReturn(validResponseDto);
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
         mockMvc.perform(get(API_URL + "{beerId}", randomUUID)
-//                        .param("iscold", "yes")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("v1/beer/GET", pathParameters(
-                        parameterWithName("beerId").description("UUID of desired beer to get")),
-//                        , requestParameters(parameterWithName("iscold").description("Is Beer Cold Query param")),
+                                parameterWithName("beerId").description("UUID of desired beer to get")),
                         responseFields(
                                 fields.withPath("id").description("Id of beer"),
                                 fields.withPath("version").description("Version number"),
@@ -81,8 +84,7 @@ class BeerControllerTest {
                                 fields.withPath("beerName").description("Beer Name"),
                                 fields.withPath("beerStyle").description("Beer Style"),
                                 fields.withPath("upc").description("UPC of Beer"),
-                                fields.withPath("price").description("Price of the beer"),
-                                fields.withPath("quantityOnHand").description("Quantity on hand")
+                                fields.withPath("price").description("Price of the beer")
                         )
                 ));
     }
@@ -97,15 +99,10 @@ class BeerControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(document("v1/beer/POST",
                         requestFields(
-                                fields.withPath("id").ignored(),
-                                fields.withPath("version").ignored(),
-                                fields.withPath("createdDate").ignored(),
-                                fields.withPath("lastModifiedDate").ignored(),
                                 fields.withPath("beerName").description("Name of the beer"),
                                 fields.withPath("beerStyle").description("Style of Beer"),
                                 fields.withPath("upc").description("Beer UPC").attributes(),
-                                fields.withPath("price").description("The Beer Price"),
-                                fields.withPath("quantityOnHand").ignored()
+                                fields.withPath("price").description("The Beer Price")
                         )));
     }
 
