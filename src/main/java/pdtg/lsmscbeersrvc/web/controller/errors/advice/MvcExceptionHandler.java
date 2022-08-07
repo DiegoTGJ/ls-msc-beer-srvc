@@ -21,7 +21,6 @@ import pdtg.lsmscbeersrvc.web.controller.errors.exceptions.NotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.net.ConnectException;
 import java.util.*;
-import org.postgresql.util.PSQLException;
 /**
  * Created by Diego T. 22-07-2022
  */
@@ -99,7 +98,7 @@ public class MvcExceptionHandler {
     ){
         ErrorResponse errorResponse = new ErrorResponse(
                 httpStatus.value(),
-                ex.getClass() == PSQLException.class ? ex.getMessage().split("Detail: ")[1] : ex.getMessage());
+                ex.getMessage());
 
         if(printStackTrace && isTraceOn(request)){
             errorResponse.setStackTrace(ExceptionUtils.getStackTrace(ex));

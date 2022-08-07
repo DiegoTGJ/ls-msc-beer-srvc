@@ -1,20 +1,15 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/springdevdb
-    username: springdevuser
-    password: springdevpass
+    url: jdbc:mysql://localhost:3306/beerservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: beer_service
+    password: password
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
-    properties:
-      hibernate:
-        type: TRACE
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
 server:
   error:
     include-message: always
