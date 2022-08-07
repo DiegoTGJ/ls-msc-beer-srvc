@@ -12,6 +12,8 @@ import pdtg.lsmscbeersrvc.events.NewInventoryEvent;
 import pdtg.lsmscbeersrvc.repositories.BeerRepository;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by Diego T. 07-08-2022
  */
@@ -23,16 +25,17 @@ public class BrewBeerListener {
     private final BeerRepository beerRepository;
     private final JmsTemplate jmsTemplate;
 
+    @Transactional
     @JmsListener(destination = JmsConfig.BREWING_REQUEST_QUEUE)
     public void listen(BrewBeerEvent event){
         BeerDto beerDto = event.getBeerDto();
         Beer beer = beerRepository.getReferenceById(beerDto.getId());
 
-        beerDto.setQuantityOnHand(beer.getQuantityToBrew()+beerDto.getQuantityOnHand());
+        beerDto.setQuantityOnHand(beer.getQuantityToBrew());
 
         NewInventoryEvent newInventoryEvent = new NewInventoryEvent(beerDto);
 
-        log.debug("Brewed beer "+beer.getMinOnHand()+" QOH: "+beerDto.getQuantityOnHand());
+        log.debug("Brewed beer for beer id:"+beer.getId()+" QOH: "+beerDto.getQuantityOnHand());
 
         jmsTemplate.convertAndSend(JmsConfig.NEW_INVENTORY_QUEUE,newInventoryEvent);
     }
