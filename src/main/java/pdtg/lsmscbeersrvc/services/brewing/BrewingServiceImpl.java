@@ -1,4 +1,4 @@
-package pdtg.lsmscbeersrvc.services;
+package pdtg.lsmscbeersrvc.services.brewing;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
