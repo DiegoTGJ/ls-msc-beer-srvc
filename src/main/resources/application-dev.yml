@@ -3,13 +3,27 @@ spring:
     url: jdbc:mysql://localhost:3306/beerservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: beer_service
     password: password
+    hikari:
+      maximum-pool-size: 5
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSizeLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultsSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 server:
   error:
     include-message: always
@@ -18,3 +32,16 @@ server:
     include-exception: false
 pdtg:
   trace: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
