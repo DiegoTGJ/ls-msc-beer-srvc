@@ -8,6 +8,7 @@ dependencies {
     implementation 'javax.cache:cache-api'
     implementation 'org.ehcache:ehcache'
     implementation 'org.apache.commons:commons-lang3'
+    implementation 'org.springframework.boot:spring-boot-starter-artemis'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

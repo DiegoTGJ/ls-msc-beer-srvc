@@ -16,6 +16,9 @@ spring:
         cacheServerConfiguration: true
         elideSetAutoCommits: true
         maintainTimeStats: false
+  artemis:
+    user: artemis
+    password: simetraehcapa
   jpa:
     hibernate:
       ddl-auto: update
