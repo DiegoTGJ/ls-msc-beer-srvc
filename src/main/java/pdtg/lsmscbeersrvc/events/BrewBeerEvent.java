@@ -5,8 +5,8 @@ import pdtg.lsmscbeersrvc.web.model.BeerDto;
 /**
  * Created by Diego T. 07-08-2022
  */
-public class BewBeerEvent extends BeerEvent{
-    public BewBeerEvent(BeerDto beerDto) {
+public class BrewBeerEvent extends BeerEvent{
+    public BrewBeerEvent(BeerDto beerDto) {
         super(beerDto);
     }
 }
