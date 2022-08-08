@@ -1,4 +1,4 @@
-package pdtg.lsmscbeersrvc.events;
+package pdtg.ls.common.events;
 
 import lombok.*;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;

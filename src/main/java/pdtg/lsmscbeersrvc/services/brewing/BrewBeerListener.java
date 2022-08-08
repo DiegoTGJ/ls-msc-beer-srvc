@@ -7,8 +7,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import pdtg.lsmscbeersrvc.config.JmsConfig;
 import pdtg.lsmscbeersrvc.domain.Beer;
-import pdtg.lsmscbeersrvc.events.BrewBeerEvent;
-import pdtg.lsmscbeersrvc.events.NewInventoryEvent;
+import pdtg.ls.common.events.BrewBeerEvent;
+import pdtg.ls.common.events.NewInventoryEvent;
 import pdtg.lsmscbeersrvc.repositories.BeerRepository;
 import pdtg.lsmscbeersrvc.web.model.BeerDto;
 
