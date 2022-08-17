@@ -11,9 +11,9 @@ import pdtg.lsmscbeersrvc.domain.Beer;
 import pdtg.lsmscbeersrvc.repositories.BeerRepository;
 import pdtg.lsmscbeersrvc.web.controller.errors.exceptions.NotFoundException;
 import pdtg.lsmscbeersrvc.web.mappers.BeerMapper;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
-import pdtg.lsmscbeersrvc.web.model.BeerPagedList;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
+import pdtg.ls.brewery.model.BeerDto;
+import pdtg.ls.brewery.model.BeerPagedList;
+import pdtg.ls.brewery.model.BeerStyleEnum;
 
 import java.util.UUID;
 import java.util.stream.Collectors;

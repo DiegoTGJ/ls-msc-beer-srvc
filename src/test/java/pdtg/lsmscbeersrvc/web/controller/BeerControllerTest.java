@@ -16,8 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 import pdtg.lsmscbeersrvc.bootstrap.BeerLoader;
 import pdtg.lsmscbeersrvc.services.BeerService;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
+import pdtg.ls.brewery.model.BeerDto;
+import pdtg.ls.brewery.model.BeerStyleEnum;
 
 
 import java.math.BigDecimal;

@@ -3,7 +3,7 @@ package pdtg.lsmscbeersrvc.web.mappers;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import pdtg.lsmscbeersrvc.domain.Beer;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.ls.brewery.model.BeerDto;
 
 /**
  * Created by Diego T. 22-07-2022

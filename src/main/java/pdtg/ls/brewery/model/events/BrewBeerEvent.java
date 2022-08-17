@@ -1,7 +1,7 @@
-package pdtg.ls.common.events;
+package pdtg.ls.brewery.model.events;
 
 import lombok.NoArgsConstructor;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.ls.brewery.model.BeerDto;
 
 /**
  * Created by Diego T. 07-08-2022

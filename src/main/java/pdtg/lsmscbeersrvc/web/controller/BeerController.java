@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pdtg.lsmscbeersrvc.services.BeerService;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
-import pdtg.lsmscbeersrvc.web.model.BeerPagedList;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
+import pdtg.ls.brewery.model.BeerDto;
+import pdtg.ls.brewery.model.BeerPagedList;
+import pdtg.ls.brewery.model.BeerStyleEnum;
 
 import javax.validation.Valid;
 import java.util.UUID;

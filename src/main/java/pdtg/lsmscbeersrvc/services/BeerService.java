@@ -1,9 +1,9 @@
 package pdtg.lsmscbeersrvc.services;
 
 import org.springframework.data.domain.PageRequest;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
-import pdtg.lsmscbeersrvc.web.model.BeerPagedList;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
+import pdtg.ls.brewery.model.BeerDto;
+import pdtg.ls.brewery.model.BeerPagedList;
+import pdtg.ls.brewery.model.BeerStyleEnum;
 
 import java.util.UUID;
 

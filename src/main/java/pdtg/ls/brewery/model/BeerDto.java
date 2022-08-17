@@ -1,4 +1,4 @@
-package pdtg.lsmscbeersrvc.web.model;
+package pdtg.ls.brewery.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pdtg.lsmscbeersrvc.domain.Beer;
-import pdtg.lsmscbeersrvc.web.model.BeerStyleEnum;
+import pdtg.ls.brewery.model.BeerStyleEnum;
 
 import java.util.Optional;
 import java.util.UUID;

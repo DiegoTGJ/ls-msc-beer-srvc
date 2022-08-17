@@ -1,7 +1,7 @@
-package pdtg.ls.common.events;
+package pdtg.ls.brewery.model.events;
 
 import lombok.*;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.ls.brewery.model.BeerDto;
 
 import java.io.Serializable;
 

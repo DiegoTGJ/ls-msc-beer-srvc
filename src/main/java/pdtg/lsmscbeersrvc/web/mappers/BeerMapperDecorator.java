@@ -3,7 +3,7 @@ package pdtg.lsmscbeersrvc.web.mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import pdtg.lsmscbeersrvc.domain.Beer;
 import pdtg.lsmscbeersrvc.services.inventory.BeerInventoryService;
-import pdtg.lsmscbeersrvc.web.model.BeerDto;
+import pdtg.ls.brewery.model.BeerDto;
 
 /**
  * Created by Diego T. 28-07-2022

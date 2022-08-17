@@ -1,4 +1,4 @@
-package pdtg.lsmscbeersrvc.web.model;
+package pdtg.ls.brewery.model;
 
 /**
  * Created by Diego T. 21-07-2022
