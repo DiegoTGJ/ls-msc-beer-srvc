@@ -39,7 +39,7 @@ public class BeerOrderLineDto extends BaseItem {
     private BigDecimal price;
     private UUID beerId;
     private Integer orderQuantity = 0;
-
+    private Integer quantityAllocated;
     @Builder
     public BeerOrderLineDto(UUID id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                             String upc, String beerName, String beerStyle, BigDecimal price, UUID beerId, Integer orderQuantity) {
